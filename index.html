@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexión Bogotá - Guayaquil</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+
+        #map { height: 400px; width: 100%; }
+        .popup { font-size: 16px; }
+
+        body {
+    background-color: #f0e6f6; /* Un tono suave pastel */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Título atractivo */
+h1 {
+    color: #D57B8E; /* Un color suave pero destacado */
+    font-size: 2.5rem;
+    margin-top: 20px;
+}
+
+/* Estilo para el mapa */
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 10px; /* Bordes redondeados para hacerlo más elegante */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombras suaves */
+    margin-bottom: 30px;
+}
+
+/* Estilo para las ventanas emergentes del mapa */
+.popup {
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+/* Estilo para las ventanas emergentes */
+.leaflet-popup-content {
+    color: #D57B8E; /* Resalta el color de la fuente */
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <h1>Conexión Especial: Bogotá y Guayaquil</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
