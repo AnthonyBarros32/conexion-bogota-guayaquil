@@ -1,0 +1,82 @@
+/* Estilos generales */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(45deg, #FFB6C1, #FFCC99);margin: 0;
+    overflow: hidden;
+
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #003366;
+  }
+  
+  #map {
+    width: 90%;  /* Aumenta el tamaño del mapa */
+    height: 500px; /* Ajusta la altura */
+    border: 3px solid #003366;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    z-index: 1;
+  }
+  
+  /* Corazones animados */
+@keyframes floatingHeart {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(-200px) rotate(180deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0) rotate(360deg);
+      opacity: 0.7;
+    }
+  }
+  
+  
+  .heart {
+    position: absolute;
+    font-size: 24px;
+    color: red;
+    animation: floatingHeart 5s ease-in-out infinite;/* Asegura que no interfieran con interacciones del mapa */
+  
+  }
+  
+  .heart:nth-child(odd) {
+    animation-duration: 6s;
+  }
+  
+  .heart:nth-child(even) {
+    animation-duration: 4s;
+  }
+  
+  /* Posicionar los corazones en lugares aleatorios */
+  @keyframes randomPosition {
+    0% {
+      left: 10%;
+      top: 20%;
+    }
+    100% {
+      left: 80%;
+      top: 80%;
+    }
+  }
+  
+  /* Corazones más grandes */
+  .heart:nth-child(1) {
+    font-size: 50px;
+    animation: floatingHeart 5s ease-in-out infinite, randomPosition 8s linear infinite;
+  }
+  
