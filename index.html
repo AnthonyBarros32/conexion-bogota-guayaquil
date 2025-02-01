@@ -12,14 +12,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- Título -->
   <h1>Conexión Bogotá - Guayaquil</h1>
 
   <!-- Contenedor del mapa -->
   <div id="map"></div>
 
+  <!-- Audio -->
+  <audio id="backgroundMusic" autoplay loop>
+    <source src="music/MI DULCE AMOR-LOS INQUIETOS.mp3" type="audio/mp3">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+
   <!-- Librería de Leaflet -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="app.js"></script>
+
+  <div id="finalPopup" class="hidden-popup">
+    <div>
+      <p>¡Lo logramos! Este viaje ha sido increíble, y cada charla contigo ha sido una aventura única. 💖</p>
+      <button id="closePopup">Cerrar</button>
+    </div>
+  </div>
+
 </body>
 </html>
