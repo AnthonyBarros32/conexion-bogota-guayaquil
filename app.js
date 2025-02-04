@@ -1,41 +1,50 @@
 // Crear el mapa centrado en una zona más amplia
-const map = L.map('map').setView([1.5, -78.5], 6); // Ajusta la vista del mapa
+const map = L.map('map').setView([1.27, -76.5], 5);  // Ajusta la vista del mapa
 
 // Cargar los "tiles" de OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+const route = L.polyline([
+  [4.711, -74.0721],
+  [-2.17, -79.922]
+], {
+  color: '#ff69b4',
+  weight: 4,
+  dashArray: '10, 10',
+}).addTo(map);
+
 // Lista de marcadores
 const markersData = [
-  { coords: [4.7110, -74.0721], message: '<b>La Candelaria</b><br> Cada conversación contigo es como perderse en las callecitas de este barrio, llenas de historia y sorpresas.',
+  { coords: [4.7110, -74.0721], message: '<b>La Candelaria</b><br> Cada conversación contigo es como perderse en estas callecitas llenas de historia: siempre encuentro algo nuevo y especial que me encanta de ti.',
     image: 'images/la candelaria.jpg' 
    },
-  { coords: [4.5954, -74.0807], message: '<b>Monserrate</b><br> Hablar contigo me hace sentir en la cima del mundo, viendo todo desde lo más alto, con claridad.',
+  { coords: [4.5954, -74.0807], message: '<b>Monserrate</b><br> Hablar contigo me hace sentir en lo más alto, como si desde aquí pudiera tocar el cielo, justo como siento cada vez que te veo sonreír.',
     image: 'images/Monserrate.jpg'
    },
   { coords: [4.6097, -74.0822], message: '<b>Plaza de Bolívar</b><br> Cada vez que compartimos algo importante, siento que estamos en el centro de todo, rodeados de significado.',
     image: 'images/Plaza-de-Bolivar.jpg'
    },
-  { coords: [4.6092, -74.0800], message: '<b>Museo del Oro</b><br> Como descubrir cada detalle de una historia que me encanta, una conversación contigo siempre tiene algo valioso.',
+  { coords: [4.6092, -74.0800], message: '<b>Museo del Oro</b><br> Cada conversación contigo es un descubrimiento valioso, como explorar un tesoro escondido donde cada palabra brilla con su propio encanto.',
     image: 'images/Museo del Oro.jpg'
    },
-  { coords: [4.6667, -74.0500], message: '<b>Parque de la 93</b><br> Conversar contigo es como dar una vuelta por este parque, rodeado de risas y buena compañía.',
+  { coords: [4.6667, -74.0500], message: '<b>Parque de la 93</b><br> Si caminar juntos por este parque es como imagino, entonces nuestras conversaciones son ese paseo perfecto: llenas de risas, tranquilidad y buena compañía.',
     image: 'images/Parque de la 93.jpg'
    },
-  { coords: [-2.1700, -79.9220], message: '<b>Malecón 2000</b><br> Cada vez que hablo contigo, siento que estamos caminando juntos por este malecón.',
+  { coords: [-2.1700, -79.9220], message: '<b>Malecón 2000</b><br> Aunque estamos lejos, cada palabra tuya me hace sentir como si camináramos juntos por este malecón, compartiendo sueños al compás del río.',
     image: 'images/malecon-2000-la-perla.jpg'
    },
-  { coords: [-2.1873, -79.9585], message: '<b>Las Peñas</b><br> Como este barrio colorido, cada conversación contigo es única y llena de vida.',
+  { coords: [-2.1873, -79.9585], message: '<b>Las Peñas</b><br> Hablar contigo es como recorrer este barrio colorido: cada momento tiene su propia vida, alegría y chispa que me encanta.',
     image: 'images/Laspenas.jpg'
    },
-  { coords: [-2.1487, -79.9510], message: '<b>Parque Histórico</b><br> Cada conversación contigo me hace descubrir algo nuevo, como explorar un lugar lleno de historias.',
+  { coords: [-2.1487, -79.9510], message: '<b>Parque Histórico</b><br> Cada charla contigo es como explorar un lugar lleno de historias, donde siempre descubro algo nuevo que me encanta de ti.',
     image: 'images/ParqueHistorico.jpg'
    },
-  { coords: [-2.1900, -79.8895], message: '<b>Catedral Metropolitana</b><br> Hablar contigo siempre tiene una esencia única.',
+  { coords: [-2.1900, -79.8895], message: '<b>Catedral Metropolitana</b><br> Tus palabras tienen esa magia especial, como si fueran el eco de algo eterno que me hace sentir único.',
     image: 'images/CATEDRAL-Guayaquil.jpg'
    },
-  { coords: [-2.1123, -79.9170], message: '<b>Isla Santay</b><br> Cada charla contigo es como caminar por esta isla.',
+  { coords: [-2.1123, -79.9170], message: '<b>Isla Santay</b><br> Conversar contigo es como caminar por esta isla tranquila: el tiempo parece detenerse, y solo importan los momentos que compartimos.',
     image: 'images/isla-Santay-Guayaquil-Ecuador.jpg'
    }
 ];
@@ -58,6 +67,11 @@ markersData.forEach(data => {
   
   // Asociar el contenido del popup al marcador
   marker.bindPopup(popupContent);
+
+  // Centrar mapa en el marcador al abrir su popup
+  marker.on('click', function () {
+    map.setView(marker.getLatLng(), 10, { animate: true });
+  });
 });
 
 // Variables para controlar si se han cerrado todos los popups
@@ -89,6 +103,7 @@ window.onload = function () {
   document.getElementById('closePopup').addEventListener('click', () => {
     const popup = document.getElementById('finalPopup');
     popup.classList.add('hidden-popup');
+    closedPopupsCount = 0; // Reinicia el contador si deseas reabrirlo en el futuro
   });
 };
 
