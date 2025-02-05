@@ -45,7 +45,7 @@ const markersData = [
     image: 'images/CATEDRAL-Guayaquil.jpg'
    },
   { coords: [-2.1123, -79.9170], message: '<b>Isla Santay</b><br> Conversar contigo es como caminar por esta isla tranquila: el tiempo parece detenerse, y solo importan los momentos que compartimos.',
-    image: 'images/isla-Santay-Guayaquil-Ecuador.jpg'
+    image: 'images/isla-Santay.jpg'
    }
 ];
 
