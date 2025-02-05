@@ -45,60 +45,59 @@ const markersData = [
     image: 'images/CATEDRAL-Guayaquil.jpg'
    },
   { coords: [-2.1123, -79.9170], message: '<b>Isla Santay</b><br> Conversar contigo es como caminar por esta isla tranquila: el tiempo parece detenerse, y solo importan los momentos que compartimos.',
-    image: 'images/isla-Santay.jpg'
+    image: 'images/santay.jpg'
    }
 ];
 
 // Crear marcadores y almacenar referencias
 const markers = [];
-
-// Ajustar vista del mapa después de agregar todos los marcadores
 markersData.forEach(data => {
-  // Crear el marcador y agregarlo al mapa
   const marker = L.marker(data.coords).addTo(map);
   markers.push(marker);
-  
-  // Crear el contenido del popup, incluyendo la imagen
+
   const popupContent = `
     ${data.message}
     <br>
     <img src="${data.image}" alt="Imagen del lugar" style="width:100%; max-width:200px; border-radius:8px; margin-top:8px;">
   `;
-  
-  // Asociar el contenido del popup al marcador
   marker.bindPopup(popupContent);
 
-  // Centrar mapa en el marcador al abrir su popup
   marker.on('click', function () {
     map.setView(marker.getLatLng(), 10, { animate: true });
   });
 });
 
-// Variables para controlar si se han cerrado todos los popups
-let closedPopupsCount = 0;
+// Botón para empezar la experiencia
+document.getElementById('startButton').addEventListener('click', () => {
+  // Ocultar el popup inicial
+  const popup = document.getElementById('initialPopup');
+  popup.style.display = 'none';
 
-// Escuchar el evento cuando se cierre un popup
+  // Centrar el mapa en la ruta y mostrar el mapa
+  map.setView([1.27, -76.5], 5, { animate: true });
+});
+
+// Mostrar popup final tras cerrar todos los popups de lugares
+let closedPopupsCount = 0;
 markers.forEach(marker => {
   marker.on('popupclose', function () {
     closedPopupsCount++;
     checkCompletion();
   });
 });
-
-// Función para verificar si todos los popups han sido cerrados
+// Función para verificar si se han cerrado todos los popups
 function checkCompletion() {
-  console.log(`Popups cerrados: ${closedPopupsCount}/${markers.length}`);
   if (closedPopupsCount === markers.length) {
     showFinalPopup();
   }
 }
-
-// Mostrar el popup final
+// Función para mostrar el popup final
 function showFinalPopup() {
   const popup = document.getElementById('finalPopup');
   popup.classList.remove('hidden-popup');
+  popup.classList.add('active-popup'); // Clase para mostrar el popup
 }
-
+// Cerrar el popup final
 window.onload = function () {
   document.getElementById('closePopup').addEventListener('click', () => {
     const popup = document.getElementById('finalPopup');
@@ -119,5 +118,5 @@ function createHeart() {
   heart.style.top = `${y}px`;
   setTimeout(() => heart.remove(), 5000);
 }
-
+// Crear corazones cada 400ms
 setInterval(createHeart, 400);

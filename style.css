@@ -72,11 +72,15 @@ html, body {
     animation: floatingHeart 5s ease-in-out infinite, randomPosition 8s linear infinite;
   }
 
+.active-popup {
+    display: block !important;
+  }
   /* Estilo base oculto */
 .hidden-popup {
-  display: none;
+  display: none !important;;
 }
 
+#initialPopup,
 #finalPopup {
   position: fixed;
   top: 50%;
@@ -92,6 +96,11 @@ html, body {
   max-width: 400px;
 }
 
+#initialPopup.active {
+  display: block;
+}
+
+#initialPopup,
 #closePopup {
   background-color: #ff6b6b;
   color: white;
@@ -99,4 +108,19 @@ html, body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+button {
+  background-color: #ff7b54;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #e66f49;
 }
