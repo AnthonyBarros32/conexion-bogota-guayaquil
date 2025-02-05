@@ -75,6 +75,14 @@ document.getElementById('startButton').addEventListener('click', () => {
 
   // Centrar el mapa en la ruta y mostrar el mapa
   map.setView([1.27, -76.5], 5, { animate: true });
+
+  // Reproducir la música al hacer clic
+  const music = document.getElementById('backgroundMusic');
+  music.play().then(() => {
+    console.log('Música reproduciéndose');
+  }).catch((error) => {
+    console.log('Error al reproducir música:', error);
+  });
 });
 
 // Mostrar popup final tras cerrar todos los popups de lugares
@@ -112,8 +120,8 @@ function createHeart() {
   heart.classList.add('heart');
   heart.innerHTML = '❤️';
   document.body.appendChild(heart);
-  const x = Math.random() * window.innerWidth;
-  const y = Math.random() * window.innerHeight;
+  const x = Math.random() * window.innerWidth - 50;
+  const y = Math.random() * window.innerHeight - 50;
   heart.style.left = `${x}px`;
   heart.style.top = `${y}px`;
   setTimeout(() => heart.remove(), 5000);

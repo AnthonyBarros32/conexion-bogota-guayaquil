@@ -40,10 +40,11 @@ html, body {
   
   .heart {
     position: absolute;
-    font-size: 24px;
+    font-size: 30px;
     color: red;
-    animation: floatingHeart 5s ease-in-out infinite;/* Asegura que no interfieran con interacciones del mapa */
-    z-index: 0;
+    animation: moveHeart 5s ease-in-out infinite;/* Asegura que no interfieran con interacciones del mapa */
+    pointer-events: none;
+    z-index: -1;
   }
   
   .heart:nth-child(odd) {
@@ -57,12 +58,13 @@ html, body {
   /* Posicionar los corazones en lugares aleatorios */
   @keyframes randomPosition {
     0% {
-      left: 10%;
-      top: 20%;
+      transform: scale(1) translateY(0);
+    }
+    50% {
+      transform: scale(1.5) translateY(-100px);
     }
     100% {
-      left: 80%;
-      top: 80%;
+      transform: scale(1) translateY(0);
     }
   }
   
@@ -80,8 +82,7 @@ html, body {
   display: none !important;;
 }
 
-#initialPopup,
-#finalPopup {
+#initialPopup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -96,10 +97,28 @@ html, body {
   max-width: 400px;
 }
 
+#finalPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
 #initialPopup.active {
   display: block;
 }
 
+#finalPopup.active-popup {
+  display: block;
+}
 #initialPopup,
 #closePopup {
   background-color: #ff6b6b;
