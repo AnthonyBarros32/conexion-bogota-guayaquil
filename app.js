@@ -116,15 +116,24 @@ window.onload = function () {
 
 // Función para crear corazones animados
 function createHeart() {
+  const heartLayer = document.getElementById('heartLayer');
   const heart = document.createElement('div');
   heart.classList.add('heart');
-  heart.innerHTML = '❤️';
-  document.body.appendChild(heart);
+  heart.textContent = "❤️";
+  heartLayer.appendChild(heart);
+
+  // Posición aleatoria en la pantalla
   const x = Math.random() * window.innerWidth - 50;
   const y = Math.random() * window.innerHeight - 50;
+  
   heart.style.left = `${x}px`;
   heart.style.top = `${y}px`;
-  setTimeout(() => heart.remove(), 5000);
+
+  // Animación de caída
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);  // El corazón desaparece después de 5 segundos
 }
-// Crear corazones cada 400ms
-setInterval(createHeart, 400);
+
+// Generar corazones continuamente
+setInterval(createHeart, 500);

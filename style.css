@@ -40,11 +40,10 @@ html, body {
   
   .heart {
     position: absolute;
-    font-size: 30px;
-    color: red;
-    animation: moveHeart 5s ease-in-out infinite;/* Asegura que no interfieran con interacciones del mapa */
-    pointer-events: none;
-    z-index: -1;
+    font-size: 3rem;
+    animation: float 4s infinite;
+    opacity: 0;
+    z-index: 0; 
   }
   
   .heart:nth-child(odd) {
@@ -91,10 +90,11 @@ html, body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 9999; /* Asegura que los popups estén por encima de todos los demás elementos */
   text-align: center;
   width: 90%;
   max-width: 400px;
+  display: none; 
 }
 
 #finalPopup {
@@ -106,10 +106,11 @@ html, body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 3;
+  z-index: 9999; /* Asegura que los popups estén por encima de todos los demás elementos */
   text-align: center;
   width: 90%;
   max-width: 400px;
+  display: none; 
 }
 
 #initialPopup.active {
@@ -143,3 +144,78 @@ button {
 button:hover {
   background-color: #e66f49;
 }
+#heartLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1; /* Por debajo de los popups */
+}
+
+/* Contenedor de los corazones */
+#hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  margin: 0;
+  padding: 0; /* Los corazones se ubicarán detrás de todo */
+}
+
+/* Estilos del texto del título */
+#conexionTitle {
+  font-family: 'Poppins', sans-serif;
+  color: #ff69b4;
+  text-align: center;
+  font-size: 32px;
+  background: linear-gradient(135deg, #ffe4e1, #f5a9bc);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  margin: 20px auto;
+}
+
+/* Corazones en movimiento */
+.heart {
+  position: absolute;
+  font-size: 3rem;
+  animation: float 4s infinite;
+  opacity: 0;
+  z-index: 0; /* Los corazones deben estar por debajo del texto */
+}
+
+/* Animación de los corazones */
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(50px, -50px); /* Movimiento hacia la derecha y arriba */
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50px, -100px); /* Movimiento hacia la izquierda y más arriba */
+    opacity: 0;
+  }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  #conexionTitle:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+  }
+
+  .heart {
+    font-size: 2.5rem;
+  }
+}
+
+
